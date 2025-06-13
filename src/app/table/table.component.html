@@ -1,0 +1,110 @@
+<div class="color-table-background w-100 h-100 overflow-auto"
+     appScroll
+     [contentChanged$]="recalculateHeightWidth$"
+     [request]="['positionX', 'positionY']"
+     (scrollYPosition)="tableYScroll($event)"
+     (scrollXPosition)="tableXScroll($event)">
+  <table cdk-table [dataSource]="colorTableData"
+         [trackBy]="trackById"
+         class="table table-striped table-borderless h-100 color-library-table">
+
+    <ng-container [cdkColumnDef]="ColorColumns.type" sticky="true">
+      <th cdk-header-cell *cdkHeaderCellDef [ngClass]="{'stuck top' : stuckTop}">Type</th>
+      <td cdk-cell *cdkCellDef="let cell; dataSource: colorTableData; index as row"
+          class="z-2 align-center text-center">
+        <div class="fw-bolder">{{ cell.type }}</div>
+      </td>
+    </ng-container>
+
+    <ng-container [cdkColumnDef]="ColorColumns.colorNumber" sticky="true">
+      <th cdk-header-cell *cdkHeaderCellDef [ngClass]="{'stuck top' : stuckTop}">Color Number</th>
+      <td cdk-cell *cdkCellDef="let cell; dataSource: colorTableData; index as row" class="z-2">
+        <div class="text-nowrap">{{ cell.colorNumber }}</div>
+      </td>
+    </ng-container>
+
+    <ng-container [cdkColumnDef]="ColorColumns.shadowLeft" sticky="true">
+      <th cdk-header-cell
+          *cdkHeaderCellDef
+          class="p-0 color-table-shadowed"
+          [ngClass]="{'stuck' : stuckLeft || stuckTop, 'left': stuckLeft, 'top' : stuckTop}">
+        <div class="shadow-magic"></div>
+      </th>
+      <td cdk-cell
+          *cdkCellDef="let cell; dataSource: colorTableData;  index as row"
+          class="p-0 color-table-shadowed"
+          [ngClass]="{'stuck left': stuckLeft}">
+        <div class="shadow-magic"></div>
+      </td>
+    </ng-container>
+
+    <ng-container [cdkColumnDef]="ColorColumns.colorName">
+      <th cdk-header-cell *cdkHeaderCellDef [ngClass]="{'stuck top' : stuckTop}">Color Name</th>
+      <td cdk-cell *cdkCellDef="let cell; dataSource: colorTableData; index as row">
+        <div class="text-nowrap"> {{ cell.colorName }}</div>
+      </td>
+    </ng-container>
+
+    <ng-container [cdkColumnDef]="ColorColumns.planColor">
+      <th cdk-header-cell *cdkHeaderCellDef [ngClass]="{'stuck top' : stuckTop}">Plan Color</th>
+      <td cdk-cell *cdkCellDef="let cell; dataSource: colorTableData; index as row" class="text-center ">
+        <div class="">{{ cell.planColor.code }}</div>
+      </td>
+    </ng-container>
+
+    <ng-container [cdkColumnDef]="ColorColumns.source">
+      <th cdk-header-cell *cdkHeaderCellDef [ngClass]="{'stuck top' : stuckTop}">Source</th>
+      <td cdk-cell *cdkCellDef="let cell; dataSource: colorTableData; index as row">
+        <div class="">{{ cell.source }}</div>
+      </td>
+    </ng-container>
+
+    <ng-container [cdkColumnDef]="ColorColumns.dept">
+      <th cdk-header-cell *cdkHeaderCellDef [ngClass]="{'stuck top' : stuckTop}">Dept</th>
+      <td cdk-cell *cdkCellDef="let cell; dataSource: colorTableData; index as row">
+        <div class="text-truncate">{{ isEmpty(cell.dept) ? 'All' : cell.dept }}</div>
+      </td>
+    </ng-container>
+
+    <ng-container [cdkColumnDef]="ColorColumns.note">
+      <th cdk-header-cell *cdkHeaderCellDef
+          [ngClass]="{'stuck top' : stuckTop}">Note
+      </th>
+      <td cdk-cell *cdkCellDef="let cell; dataSource: colorTableData; index as row">
+        <div class="">{{ cell.note }}</div>
+      </td>
+    </ng-container>
+
+    <ng-container [cdkColumnDef]="ColorColumns.shadowRight" stickyEnd="true">
+      <th cdk-header-cell
+          *cdkHeaderCellDef
+          class="p-0 color-table-shadowed"
+          [ngClass]="{'stuck' : stuckRight || stuckTop, 'right': stuckRight, 'top' : stuckTop}">
+        <div class="shadow-magic"></div>
+      </th>
+      <td cdk-cell
+          *cdkCellDef="let cell; dataSource: colorTableData; index as row"
+          class="p-0 color-table-shadowed"
+          [ngClass]="{'stuck right': stuckRight}">
+        <div class="shadow-magic"></div>
+      </td>
+    </ng-container>
+
+    <ng-container [cdkColumnDef]="ColorColumns.saveCancel" stickyEnd="true">
+      <th cdk-header-cell *cdkHeaderCellDef="let cell"
+          [ngClass]="{'stuck top' : stuckTop}"></th>
+      <td cdk-cell
+          *cdkCellDef="let cell; dataSource: colorTableData;  index as row">
+        <div class="flex-start">
+          <button class="btn btn-success btn-sm me-2">Save</button>
+          <button class="btn btn-outline-secondary btn-sm">Cancel</button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr cdk-header-row *cdkHeaderRowDef="colorColumns; sticky: true" class="text-body-secondary sticky-top"
+        [ngClass]="{'stuck top shadow-md' : stuckTop}"></tr>
+    <tr cdk-row *cdkRowDef="let row; columns: colorColumns; dataSource: colorTableData; index as rowIndex;"></tr>
+
+  </table>
+</div>

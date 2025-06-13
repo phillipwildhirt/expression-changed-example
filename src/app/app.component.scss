@@ -1,0 +1,30 @@
+@use 'sass:map';
+@import '../stylesheets/variables';
+
+.window-custom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  min-width: 100vw;
+  max-width: 100vw;
+  overflow-x: hidden;
+  background: var(--bs-tertiary-bg);
+}
+
+$tabs-h: 2.25rem;
+$library-header-h: 2.599rem;
+
+.color-library-and-tabs-container {
+  height: calc(100% - $library-header-h);
+  max-height: calc(100% - $library-header-h);
+
+  & .tabs-container {
+    min-height: $tabs-h;
+  }
+
+  & .color-table-container {
+    height: calc(100% - $tabs-h);
+    max-height: calc(100% - $tabs-h);
+  }
+}

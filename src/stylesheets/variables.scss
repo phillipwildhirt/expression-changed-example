@@ -1,0 +1,213 @@
+@use 'sass:math';
+@use 'sass:map';
+@use './color-palette.function' as color-palette;
+@import '../../node_modules/bootstrap/scss/functions';
+@import './strip-unit.function';
+
+
+
+/*
+Define Theme Colors and Other Color Variables
+ */
+$primary: #007bff;
+$secondary: #6c757d;
+$success: #198754;
+$dark: #212529;
+
+$color-levels: (
+  "050": -12,
+  "100": -11.5,
+  "200": -11,
+  "300": -10,
+  "350": -9,
+  "400": -7,
+  "500": -5,
+  "550": -3,
+  "600": -1,
+  "700": 2,
+  "750": 4,
+  "800": 5,
+  "900": 6,
+  "950": 7
+);
+
+$primary-palette: color-palette.create-color-palette($color-levels, $primary, "primary");
+$success-palette: color-palette.create-color-palette($color-levels, $success, "success");
+
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-150: #f1f2f4;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #79838b;
+$gray-700: #5f6972;
+$gray-800: #495057;
+$gray-900: #343a40;
+$black: #212529;
+
+$gray-palette: (
+  "gray-100": $gray-100,
+  "gray-150": $gray-150,
+  "gray-200": $gray-200,
+  "gray-300": $gray-300,
+  "gray-400": $gray-400,
+  "gray-500": $gray-500,
+  "gray-600": $gray-600,
+  "gray-700": $gray-700,
+  "gray-800": $gray-800,
+  "gray-900": $gray-900,
+);
+
+$body-color: $black ;
+
+$body-secondary-color: rgba($body-color, .59);
+$body-secondary-bg: $gray-200;
+
+$body-tertiary-color: rgba($body-color, .75);
+$body-tertiary-bg: map.get($primary-palette, "primary-200");
+
+$body-emphasis-color: $black;
+
+
+/*
+Add Custom Theme Colors from above here if you need the ENTIRE suite of buttons, cards, tables, etc.
+@note: If you ONLY need to use bg-<color> or text-<color>, add further below in $extra-use-colors.
+ */
+$theme-colors: (
+  "primary": map.get($primary-palette, "primary"),
+  "success": map.get($success-palette, "success"),
+  "secondary": $secondary,
+  "dark": $dark,
+);
+
+
+$spacer: 1rem;
+$spacers: (
+  "0"  : 0,
+  "1"  : $spacer *.25, // 4 px
+  "2"  : $spacer *.5, // 8 px
+  "3"  : $spacer *.75, // 12 px
+  "4"  : $spacer, // 16 px
+);
+
+$position-values: (
+  0: 0,
+  25: 25%,
+  50: 50%,
+  75: 75%,
+  100: 100%
+);
+
+
+$zindex-sticky: 1000;
+
+
+$enable-negative-margins: true;
+$grid-columns: 24;
+$grid-gutter-width: 0;
+
+$variable-prefix: bs-;
+$prefix: $variable-prefix;
+// see utilities.scss for more grid map expansion
+
+
+$font-family: (
+  "Open Sans": Open Sans
+);
+$font-family-base: Open Sans, sans-serif;
+$headings-font-weight: 300;
+$headings-margin-bottom: 0;
+$font-size-base: 1rem;
+$small-font-size: 85%;
+
+$body-color: $black;
+
+
+$border-color: $gray-400;
+$border-color-translucent: rgba($black, .25);
+
+$paragraph-margin-bottom: 0rem;
+
+
+$hr-margin-y: 0;
+$hr-color: map.get($primary-palette, "primary");
+
+
+$border-radius: .125rem;
+$border-radius-lg: .2rem;
+$border-radius-sm: .07rem;
+
+$btn-border-radius: $border-radius;
+$btn-border-radius-sm: $border-radius-sm;
+$btn-border-radius-lg: $border-radius-lg;
+
+
+$enable-shadows: true;
+
+$box-shadow-sm: 0 .125rem .25rem rgba(0, 0, 0, .15);
+$box-shadow-md: 0 .25rem .5rem rgba(0, 0, 0, .175);
+$box-shadow: 0 .3rem 1rem rgba(0, 0, 0, .2);
+$box-shadow-lg: 0 .75rem 3rem rgba(0, 0, 0, .25);
+$box-shadow-super: 0 .75rem 4rem rgba(0, 0, 0, .4);
+
+
+$box-shadows: (
+  "shadow-lg": $box-shadow-lg,
+  "shadow": $box-shadow,
+  "shadow-sm": $box-shadow-sm,
+  "shadow-md": $box-shadow-md,
+  "shadow-super": $box-shadow-super
+);
+
+
+$table-header-bottom-border: 0 1px 0 var(--primary-350);
+
+$table-hover-bg-factor: .06;
+$table-striped-bg-factor: .035;
+$table-striped-bg-rgba: rgba($body-emphasis-color, $table-striped-bg-factor);
+$table-border-color: $border-color;
+$table-head-line-height: 1.2;
+
+$table-bg-scale: -70%;
+$table-border-factor: .2;
+
+$table-bg: inherit;
+
+
+$focus-ring-opacity: .25;
+
+
+$component-active-bg: map.get($primary-palette, "primary");
+$focus-ring-width: .25rem;
+$focus-ring-color: rgba($component-active-bg, $focus-ring-opacity);
+$focus-ring-opacity: .25;
+$focus-ring-blur: 0;
+$focus-ring-box-shadow: 0 0 $focus-ring-blur $focus-ring-width $focus-ring-color;
+
+
+$zindex-levels: (
+  n1: -1,
+  0: 0,
+  1: 1,
+  2: 2,
+  3: 3,
+);
+
+
+$btn-padding-x: 1.5rem;
+$btn-padding-x-sm: 1rem;
+$btn-padding-x-lg: 3rem;
+$btn-box-shadow: 0 0 0 0;
+$btn-disabled-opacity: .5;
+
+
+
+
+
+
+
+
+// MUST BE LAST
+@import '../../node_modules/bootstrap/scss/variables';

@@ -1,0 +1,103 @@
+@use 'sass:map';
+
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
+// scss-docs-end theme-colors-rgb
+
+// scss-docs-start theme-text-map
+//\:\s+shade\-color\(\$[a-z-0-9]+\, 60\%\)\;
+
+//\$([a-z-0-9]+)(-[a-z]+)(-[a-z]+)
+//  "$1": \$$1$2$3
+$theme-colors-text: (
+  "primary": $primary-text-emphasis,
+  "secondary": $secondary-text-emphasis,
+  "dark": $dark-text-emphasis,
+);
+// scss-docs-end theme-text-map
+
+// scss-docs-start theme-bg-subtle-map
+$theme-colors-bg-subtle: (
+  "primary": $primary-bg-subtle,
+  "secondary": $secondary-bg-subtle,
+  "dark": $dark-bg-subtle,
+);
+// scss-docs-end theme-bg-subtle-map
+
+// scss-docs-start theme-border-subtle-map
+$theme-colors-border-subtle: (
+  "primary": $primary-border-subtle,
+  "secondary": $secondary-border-subtle,
+  "dark": $dark-border-subtle,
+);
+// scss-docs-end theme-border-subtle-map
+
+$theme-colors-text-dark: null !default;
+$theme-colors-bg-subtle-dark: null !default;
+$theme-colors-border-subtle-dark: null !default;
+
+// Utilities maps
+//
+// Extends the default `$theme-colors` maps to help create our utilities.
+
+// Come v6, we'll de-dupe these variables. Until then, for backward compatibility, we keep them to reassign.
+// scss-docs-start utilities-colors
+$utilities-colors: $theme-colors-rgb;
+// scss-docs-end utilities-colors
+
+// scss-docs-start utilities-text-colors
+$utilities-text: map-merge(
+    $utilities-colors,
+    (
+      "black": to-rgb($black),
+      "white": to-rgb($white),
+      "body": to-rgb($body-color)
+    )
+);
+$utilities-text-colors: map-loop($utilities-text, rgba-css-var, "$key", "text");
+
+$utilities-text-emphasis-colors: (
+  "primary-emphasis": var(--#{$prefix}primary-text-emphasis),
+  "secondary-emphasis": var(--#{$prefix}secondary-text-emphasis),
+  "dark-emphasis": var(--#{$prefix}dark-text-emphasis),
+);
+// scss-docs-end utilities-text-colors
+
+// scss-docs-start utilities-bg-colors
+$utilities-bg: map-merge(
+    $utilities-colors,
+    (
+      "black": to-rgb($black),
+      "white": to-rgb($white),
+      "body": to-rgb($body-bg)
+    )
+);
+$utilities-bg-colors: map-loop($utilities-bg, rgba-css-var, "$key", "bg");
+
+$utilities-bg-subtle: (
+  "primary-subtle": var(--#{$prefix}primary-bg-subtle),
+  "secondary-subtle": var(--#{$prefix}secondary-bg-subtle),
+  "dark-subtle": var(--#{$prefix}dark-bg-subtle),
+);
+// scss-docs-end utilities-bg-colors
+
+// scss-docs-start utilities-border-colors
+$utilities-border: map-merge(
+    $utilities-colors,
+    (
+      "black": to-rgb($black),
+      "white": to-rgb($white)
+    )
+);
+$utilities-border-colors: map-loop($utilities-border, rgba-css-var, "$key", "border");
+
+$utilities-border-subtle: (
+  "primary-subtle": var(--#{$prefix}primary-border-subtle),
+  "secondary-subtle": var(--#{$prefix}secondary-border-subtle),
+  "dark-subtle": var(--#{$prefix}dark-border-subtle),
+);
+
+$utilities-links-underline: map-loop($utilities-colors, rgba-css-var, "$key", "link-underline");
+
+$negative-spacers: if($enable-negative-margins, negativify-map($spacers), null) !default;
+
+$gutters: $spacers;

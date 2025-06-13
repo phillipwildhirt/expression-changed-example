@@ -1,0 +1,95 @@
+@import '../../stylesheets/variables';
+@import '../../stylesheets/opaque-from-transparency.functions';
+
+
+.color-table-background {
+  tr:nth-of-type(odd) > td.cdk-table-sticky:not(.stuck) {
+    --bs-table-bg-type: none;
+    background-color: opaque-from-transparency($body-bg, $table-striped-bg-rgba);
+  }
+
+  tr:nth-of-type(even) > td.cdk-table-sticky:not(.stuck), th.cdk-table-sticky:not(.stuck.left, .stuck.right) {
+    background-color: var(--bs-body-bg);
+  }
+
+  tr:nth-of-type(odd) > td.color-table-shadowed.stuck {
+    &.right, &.left {
+      --bs-table-bg-type: none;
+      background: none;
+    }
+  }
+
+  .color-table-shadowed {
+    min-width: .375rem;
+    max-width: .375rem;
+    width: .375rem;
+
+    &.stuck {
+
+      & > .shadow-magic {
+        content: ' ';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+
+      &.left > .shadow-magic {
+        background: linear-gradient(to left, transparent 0, rgba($black, .15) 100%);
+      }
+
+      &.right > .shadow-magic {
+        background: linear-gradient(to right, transparent 0, rgba($black, .15) 100%);
+      }
+    }
+  }
+}
+
+
+
+.color-library-table {
+  &.color-table-fixed {
+    table-layout: fixed;
+  }
+
+  & .cdk-column-type {
+    width: 2.813rem;
+  }
+
+  & .cdk-column-colorNumber {
+    width: 13.25rem;
+  }
+
+  & .cdk-column-colorName {
+    width: 11rem;
+    text-wrap: nowrap;
+  }
+
+
+  & .cdk-column-planColor {
+    width: 6.6rem;
+    height: 42px;
+  }
+
+  & .cdk-column-source {
+    width: 18.438rem;
+    text-wrap: nowrap;
+  }
+
+  & .cdk-column-dept {
+    width: 16rem;
+  }
+
+  & .cdk-column-active {
+    width: 4.125rem;
+  }
+
+  & .cdk-column-note {
+    width: 1000px;
+  }
+
+  & .cdk-column-saveCancel {
+    padding: 5px $table-cell-padding-x !important;
+  }
+}

@@ -1,0 +1,86 @@
+@use 'sass:math';
+@use 'sass:map';
+$OpenSansPath: '../fonts';
+$OpenSansVersion: '1.2.4';
+@import 'open-sans-fontface/open-sans';
+@import 'stylesheets/variables';
+@import 'stylesheets/maps';
+@import 'bootstrap/scss/_mixins.scss';
+@import 'stylesheets/utilities';
+@import 'stylesheets/bootstrap';
+
+
+.flex-center {
+  @extend .d-flex;
+  @extend .align-items-center;
+  @extend .justify-content-center;
+}
+
+.flex-between {
+  @extend .d-flex;
+  @extend .justify-content-between;
+}
+
+.flex-start {
+  @extend .d-flex;
+  @extend .justify-content-start;
+}
+
+.flex-end {
+  @extend .d-flex;
+  @extend .align-items-center;
+  @extend .justify-content-end;
+}
+
+
+
+:root {
+  @each $shade, $value in $primary-palette {
+    --#{$shade}: #{$value};
+  }
+  @each $shade, $value in $gray-palette {
+    --#{$shade}: #{$value};
+  }
+
+  @each $shade, $value in $primary-palette {
+    --#{$shade}-rgb: #{to-rgb($value)};
+  }
+  @each $shade, $value in $gray-palette {
+    --#{$shade}-rgb: #{to-rgb($value)};
+  }
+}
+
+.inset-scroll-shadow {
+  box-shadow: inset 0 1rem 0.25rem -1rem rgba(0, 0, 0, .25), inset 0 -1rem 0.25rem -1rem rgba(0, 0, 0, .25);
+}
+
+.max-container {
+  min-height: 100%;
+  height: 100%;
+  max-height: 100%;
+  min-width: 100%;
+  width: 100%;
+  max-width: 100%;
+}
+
+
+table thead tr.sticky-top {
+  box-shadow: $table-header-bottom-border;
+  background: var(--bs-body-bg);
+  @each $shadow, $value in $box-shadows {
+    &.#{$shadow} {
+      box-shadow: $table-header-bottom-border, $value !important;
+    }
+  }
+}
+
+.table > :not(caption) > * > th {
+  color: inherit;
+}
+table.table-no-bg {
+  --#{$prefix}table-bg: none;
+}
+
+.table > :not(caption) > * > .tooltip {
+  padding: 0;
+}
